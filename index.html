@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Fire Item Claim</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .item.selected {
+      border: 3px solid #00ff00;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-4">
+  <!-- Banner -->
+  <div class="w-full max-w-3xl mb-6">
+    <img id="bannerImage" src="banner.jpg" alt="Event Banner" class="w-full rounded-xl shadow-xl"/>
+  </div>
+
+  <!-- UID Input -->
+  <input id="uidInput" type="text" placeholder="Enter your Free Fire UID"
+         class="p-3 rounded-xl w-full max-w-md text-black text-lg mb-6"/>
+
+  <!-- Items -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mb-6">
+    <div class="item cursor-pointer p-2 bg-gray-800 rounded-xl" onclick="toggleItem(this)">
+      <img src="item1.png" class="w-full rounded" alt="Item 1"/>
+    </div>
+    <div class="item cursor-pointer p-2 bg-gray-800 rounded-xl" onclick="toggleItem(this)">
+      <img src="item2.png" class="w-full rounded" alt="Item 2"/>
+    </div>
+    <div class="item cursor-pointer p-2 bg-gray-800 rounded-xl" onclick="toggleItem(this)">
+      <img src="item3.png" class="w-full rounded" alt="Item 3"/>
+    </div>
+    <div class="item cursor-pointer p-2 bg-gray-800 rounded-xl" onclick="toggleItem(this)">
+      <img src="item4.png" class="w-full rounded" alt="Item 4"/>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button onclick="submitClaim()"
+          class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-bold">
+    Submit
+  </button>
+
+  <!-- Congratulations Popup -->
+  <div id="popup" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+    <div class="bg-white text-black p-8 rounded-xl text-center max-w-sm shadow-xl">
+      <h2 class="text-2xl font-bold mb-4">🎉 Congratulations!</h2>
+      <p>Your selected items have been submitted.</p>
+      <button onclick="closePopup()" class="mt-6 bg-blue-600 text-white px-4 py-2 rounded-lg">OK</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleItem(el) {
+      el.classList.toggle("selected");
+    }
+
+    function submitClaim() {
+      const uid = document.getElementById("uidInput").value.trim();
+      if (!uid) {
+        alert("Please enter your UID.");
+        return;
+      }
+      const selectedItems = document.querySelectorAll(".item.selected");
+      if (selectedItems.length === 0) {
+        alert("Please select at least one item.");
+        return;
+      }
+      document.getElementById("popup").classList.remove("hidden");
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
